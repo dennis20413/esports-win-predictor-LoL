@@ -1,0 +1,85 @@
+{
+  "data_source": "synthetic",
+  "real_data_evaluated": false,
+  "warning": "Synthetic results only validate this simulation and code path",
+  "source_sha256": "1b4057b6193670479ca07b5f2058630b52a4c68570c3e6594703198ace1edbfa",
+  "split": {
+    "protocol": "Ordered match-start groups; equal timestamps stay together; training outcomes must precede test cutoff",
+    "cutoff_timestamp": 1708100000000,
+    "train_matches": 2250,
+    "test_matches": 750,
+    "train_rows": 2250,
+    "test_rows": 750,
+    "purged_matches": 0,
+    "latest_train_label_timestamp": 1708097960000,
+    "first_test_start_timestamp": 1708100000000
+  },
+  "model": "logreg",
+  "threshold": 0.5,
+  "test_metrics": {
+    "rows": 750,
+    "positive_rate": 0.5106666666666667,
+    "accuracy": 0.7306666666666667,
+    "roc_auc": 0.8132910266716942,
+    "log_loss": 0.5362515160438892,
+    "brier": 0.17891544113448382,
+    "report": "              precision    recall  f1-score   support\n\n           0      0.701     0.785     0.740       367\n           1      0.767     0.679     0.720       383\n\n    accuracy                          0.731       750\n   macro avg      0.734     0.732     0.730       750\nweighted avg      0.735     0.731     0.730       750\n",
+    "confusion_matrix": [
+      [
+        288,
+        79
+      ],
+      [
+        123,
+        260
+      ]
+    ]
+  },
+  "training_prior_baseline": {
+    "rows": 750,
+    "positive_rate": 0.5106666666666667,
+    "accuracy": 0.48933333333333334,
+    "roc_auc": 0.5,
+    "log_loss": 0.6949124127279744,
+    "brier": 0.250881975308642,
+    "report": "              precision    recall  f1-score   support\n\n           0      0.489     1.000     0.657       367\n           1      0.000     0.000     0.000       383\n\n    accuracy                          0.489       750\n   macro avg      0.245     0.500     0.329       750\nweighted avg      0.239     0.489     0.322       750\n",
+    "confusion_matrix": [
+      [
+        367,
+        0
+      ],
+      [
+        383,
+        0
+      ]
+    ]
+  },
+  "feature_importance": {
+    "tower_diff": 1.0071498686365103,
+    "gold_x_time": 0.6436705237393514,
+    "kill_diff": 0.5448959365163487,
+    "gold_diff_per_min": 0.4902260717339088,
+    "dragon_diff": 0.47749052952133003,
+    "game_minute": 0.05889755409473471
+  },
+  "game_versions": [
+    "synthetic-v2"
+  ],
+  "simulation": {
+    "generator": "synthetic-v2",
+    "seed": 42,
+    "matches": 3000
+  },
+  "environment": {
+    "python": "3.11.6",
+    "sklearn": "1.9.0"
+  },
+  "limitations": [
+    "No player-disjoint isolation; recurring players may cross the cutoff",
+    "Multiple snapshots of one test match receive row-weighted metrics",
+    "Timestamp order does not isolate game patches",
+    "Only games lasting to the requested snapshot can enter the sample",
+    "No calibrated-probability or production-quality claim"
+  ],
+  "model_sha256": "dd4cc256f729c91ecbb1f0f6a673255cf95e1b5c7dec615820961130fd1b4ff7"
+}

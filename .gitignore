@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+.pytest_cache/
+.env
+.env.*
+*.joblib
+*.pkl
+artifacts/
+data/
+real_matches.csv
+*.collection.json
+reports/local-riot-evaluation.json

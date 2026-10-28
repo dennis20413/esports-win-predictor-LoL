@@ -3,12 +3,12 @@ features.py
 ===========
 Feature engineering for esports match win prediction.
 
-Given pre-match information about two teams (recent form, economy, objectives,
-and in-game state at a snapshot), build a feature vector that a classifier can
+Given the observed economy, objectives, and in-game state at a snapshot,
+build a feature vector that a classifier can
 use to predict whether the BLUE side wins.
 
 Domain note: features are chosen from a competitive-analysis perspective — the
-same lens used when scouting opponents (form, resource leads, objective control,
+same lens used when scouting opponents (resource leads, objective control,
 and tempo), not arbitrary columns.
 """
 
@@ -19,7 +19,6 @@ import pandas as pd
 
 # Columns the model expects (raw match-snapshot schema).
 RAW_COLUMNS = [
-    "blue_recent_winrate", "red_recent_winrate",
     "blue_gold", "red_gold",
     "blue_kills", "red_kills",
     "blue_towers", "red_towers",
@@ -35,9 +34,6 @@ def build_features(df: pd.DataFrame) -> pd.DataFrame:
     lead matters more than absolute values.
     """
     f = pd.DataFrame(index=df.index)
-
-    # Form differential.
-    f["form_diff"] = df["blue_recent_winrate"] - df["red_recent_winrate"]
 
     # Economic lead (gold), normalized by game time so early/late leads compare.
     minute = df["game_minute"].clip(lower=1)
@@ -60,5 +56,5 @@ def build_features(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def feature_names() -> list[str]:
-    return ["form_diff", "gold_diff_per_min", "kill_diff", "tower_diff",
+    return ["gold_diff_per_min", "kill_diff", "tower_diff",
             "dragon_diff", "game_minute", "gold_x_time"]
